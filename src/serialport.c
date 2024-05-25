@@ -1,7 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
 
-#include "turrel-interface.h"
-
 #include <stdio.h>
 #include <string.h>
 #include <fcntl.h>
@@ -9,6 +7,8 @@
 #include <termios.h>
 #include <unistd.h>
 #include <stdint.h>
+
+#include "turrel-interface.h"
 
 int initSerialPort(const char* serialport)
 {
