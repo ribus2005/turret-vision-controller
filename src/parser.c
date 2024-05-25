@@ -1,10 +1,10 @@
 #define _CRT_SECURE_NO_WARNINGS
 
-#include "turrel-interface.h"
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#include "turrel-interface.h"
 
 #define PROCESSED_COMMAND 100
 #define UNSPECIFIED_COMMAND 101
@@ -23,12 +23,12 @@
 union int32 {
     int32_t i;
     char s[sizeof(int32_t)];
-}
+};
 
 union float32 {
     float f;
     char s[sizeof(float)];
-}
+};
 
 char cmdExit[] = "exit";
 char cmdHelp[] = "help";
@@ -147,7 +147,7 @@ void loopCmd(char* serialPort) {
     char buffer[bufferMax];
 
     int cmdStatus;
-    char tokenCmd[0];
+    char* tokenCmd;
     int fd = -1;
     int rdCode;
 
@@ -171,7 +171,7 @@ void loopCmd(char* serialPort) {
             else {
                 while (tokenCmd != NULL) {
                     rdCode = readCommand(fd, cmd, buffer, bufferMax);
-                    switch (rdCode[0]) {
+                    switch (rdCode) {
                         case 0:
                             printStatusMessage(UNSPECIFIED_COMMAND);
                             break;
